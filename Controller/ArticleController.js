@@ -1,5 +1,6 @@
 import { userInfo } from "os";
 import ArticleModel from "../Model/ArticleModel.js";
+import { error } from "console";
 
 export default class ArticleController {
   static async getAll(req, res) {
@@ -40,6 +41,21 @@ export default class ArticleController {
       res.status(201).json(newArticle);
     } catch (err) {
       res.status(500).json({ error: err.message });
+    }
+  }
+
+  static async delete(req, res) {
+    try {
+      const { id } = req.params;
+      const deleted = await ArticleModel.delete(id);
+
+      if (!deleted) {
+        return res.status(404).json({ message: "Article não encontrado" });
+      }
+
+      return res.status(200).json({ message: "Article deletado com sucesso" });
+    } catch (err) {
+      return res.status(500).json({ error: err.message });
     }
   }
 }

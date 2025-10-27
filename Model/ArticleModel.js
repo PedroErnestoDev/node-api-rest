@@ -37,4 +37,12 @@ export default class ArticleModel {
       published_at,
     };
   }
+
+  static async delete(id) {
+    const [result] = await db.execute("DELETE FROM articles WHERE id = ?", [
+      id,
+    ]);
+    // result.affectedRows indica quantas linhas foram deletadas
+    return result.affectedRows > 0;
+  }
 }

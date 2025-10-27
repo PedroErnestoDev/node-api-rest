@@ -6,5 +6,6 @@ const router = express.Router()
 router.get("/", ArticleController.getAll)
 router.get("/:id", ArticleController.getArticleById)
 router.post("/", ArticleController.create)
+router.delete("/:id", ArticleController.delete)
 
 export default router
